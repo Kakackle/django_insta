@@ -7,14 +7,34 @@
     <title>{% block title %}Django Insta{% endblock title %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="{% static 'base.css' %}" rel="stylesheet">
-    <link href="{% static 'nav.css' %}" rel="stylesheet">
+    <link href="{% static 'side.css' %}" rel="stylesheet">
     {% block styles %}
     {% endblock styles %}
 </head>
 <body>
     {% block body %}
-        {% block content %}
-        {% endblock content %}
+    <main class="main-base">
+        <nav class="side-nav">
+            <div class="side-top">
+                <ion-icon class="side-icon logo hover" name="logo-instagram"></ion-icon>
+                <div class="side-nav">
+                    <ion-icon class="side-icon hover" name="home"></ion-icon>
+                    <ion-icon class="side-icon hover" name="search-outline"></ion-icon>
+                    <ion-icon class="side-icon hover" name="compass-outline"></ion-icon>
+                    <ion-icon class="side-icon hover" name="navigate-outline"></ion-icon>
+                    <ion-icon class="side-icon hover" name="heart-outline"></ion-icon>
+                    <ion-icon class="side-icon hover" name="add-circle-outline"></ion-icon>
+                    <img class="av hover">
+                </div>
+            </div>
+            <ion-icon class="side-icon hover" name="menu-outline"></ion-icon>
+        </nav>
+        <section class="main-content">
+            {% block content %}
+            {% endblock content %}
+        </section>
+    </main>
+        
     {% endblock body %}
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

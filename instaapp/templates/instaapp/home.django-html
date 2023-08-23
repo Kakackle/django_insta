@@ -1,0 +1,11 @@
+{% extends 'base.django-html' %}
+{% load static %}
+{% block title %} Home view {% endblock title%}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'instapp/home.css' %}">
+{% endblock styles %}
+{% block content %}
+    <main class="main-home">
+        <p>Hello there, Home</p>
+    </main>
+{% endblock content%}

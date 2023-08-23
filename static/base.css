@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+}
+
+/* 
+basic color palette: https://coolors.co/ef233c-3c91e6-f9c846-2d3142-04724d
+tints and shades: https://maketintsandshades.com/#000000,EF233C,3C91E6,F9C846,2D3142,04724D
+*/
+
+:root{
+    --black: #000000;
+    --white: #FFFFFF;
+    --almost-black: #1a1a1a;
+    --gray-light: #cccccc;
+    --gray-lighter: #e6e6e6;
+    --gray-mid: #666666;
+    --gray-dark: #4d4d4d;
+    --red-main: #ef233c;
+    --red-dark: #d72036;
+    --red-darker: #a7192a;
+    --blue-main: #3c91e6;
+    --blue-light: #77b2ee;
+    --blue-dark: #3074b8;
+    --yellow-main: #f9c846;
+    --green-main: #04724d;
+    --gunmetal: #2d3142;
+
+    --max-page-width: 1440px;
+    --section-bottom: 20px;
+}
+
+.main-base{
+    height: 100vw;
+    width: 100vw;
+    display: flex;
+}
+
+.main-content{
+    padding: 4rem 12rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.hover:hover{
+    filter: brightness(0.5);
+    cursor: pointer;
+}
+
+.unified-shadow{
+    box-shadow: 0px 0px 10px 5px var(--gray-light);
+}
