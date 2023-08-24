@@ -8,7 +8,7 @@
     <main class="main-user">
         <div class="user-div">
             <div class="user-div-left">
-                <img class="user-img">
+                <img class="user-img" src="{{user.profile.profile_img.url}}">
             </div>
             <div class="user-div-right">
                 <div class="right-top">
@@ -16,27 +16,32 @@
                         <p class="author">{{user.first_name}} {{user.last_name}}</p>
                         <p class="user-info">@{{user.username}}</p>
                     </div>
-                    <p class="user-info">since 27.11.2018</p>
+                    <p class="user-info">since {{user.profile.date_created}}</p>
                 </div>
                 <div class="right-bottom">
-                    <p class="user-info">Information about the user</p>
-                    <p class="user-info-bold">Likes: 4233<p>
+                    <p class="user-info">{{user.profile.bio}}</p>
+                    <p class="user-info-bold">Likes: {{user.profile.like_count}}<p>
                     <div class="right-top-left">
-                        <p class="user-info-bold">following: 4</p>
-                        <p class="user-info-bold">followed by: 3</p>
+                        <p class="user-info-bold">following: {{user.profile.followed_count}}</p>
+                        <p class="user-info-bold">followed by: {{user.profile.followed_by_count}}</p>
                     </div>
                 </div>
             </div>
         </div>
+        {% if user.posts %}
         <container class="grid">
+            {% for post in user.posts.all %}
+                <img class="grid-img hover" src="{{post.post_image.url}}">
+            {% endfor %}
+            {% comment %} <img class="grid-img hover">
             <img class="grid-img hover">
             <img class="grid-img hover">
             <img class="grid-img hover">
             <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
+            <img class="grid-img hover"> {% endcomment %}
         </container>
+        {% else %}
+        <p> No posts by {{user.username }} yet! </p>
+        {% endif %}
     </main>
 {% endblock content %}

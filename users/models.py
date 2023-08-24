@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.utils.crypto import get_random_string
 from django.db.models import Q, F
+from django.utils import timezone
 
 # Create your models here.
 
@@ -17,10 +18,13 @@ class UserProfile(models.Model):
     profile_img = models.ImageField(null=True, blank=True,
                                      upload_to=upload_to_profile)
     bio = models.CharField(null=True, blank=True, max_length=500)
+    date_created = models.DateField(auto_now_add=True)
     slug = models.SlugField(unique=True, default='temp')
     like_count = models.PositiveIntegerField(default=0, blank=True)
     post_count = models.PositiveIntegerField(default=0, blank=True)
     comment_count = models.PositiveIntegerField(default=0, blank=True)
+    followed_count = models.PositiveIntegerField(default=0, blank=True)
+    followed_by_count = models.PositiveIntegerField(default=0, blank=True)
 
 
     def save(self, *args, **kwargs):
