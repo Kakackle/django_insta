@@ -29,10 +29,10 @@
             </div>
             <ion-icon class="side-icon hover" name="menu-outline"></ion-icon>
         </nav>
-        <section class="main-content">
+        {% comment %} <section class="main-content"> {% endcomment %}
             {% block content %}
             {% endblock content %}
-        </section>
+        {% comment %} </section> {% endcomment %}
     </main>
         
     {% endblock body %}

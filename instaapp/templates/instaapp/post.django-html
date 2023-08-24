@@ -1,0 +1,74 @@
+{% extends 'base.django-html' %}
+{% load static %}
+{% block title %} Post view {% endblock title%}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'instaapp/post.css' %}">
+{% endblock styles %}
+{% block content %}
+    <main class="main-post">
+        <div class="post">
+            <div class="post-top">
+                <div class="post-top-left">
+                    <img class="post-av">
+                    <p class="post-author hover">squeextv</p>
+                    <p class="post-time">15 hr ago</p>
+                </div>
+                <ion-icon class="post-icon hover" name="ellipsis-horizontal"></ion-icon>
+            </div>
+            <div class="post-img-div">
+                <img class="post-img">
+            </div>
+            <div class="post-bottom">
+                <div class="post-bottom-icons">
+                    <div class="icons-left">
+                        <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
+                        <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
+                        <span class="likes">Likes: 337</span>
+                        {% comment %} <ion-icon class="post-icon" name="chatbubble-outline"></ion-icon> {% endcomment %}
+                        {% comment %} <ion-icon class="post-icon" name="navigate-outline"></ion-icon> {% endcomment %}
+                    </div>
+                    <div>
+                        <ion-icon class="post-icon hover" name="bookmark-outline"></ion-icon>
+                        <ion-icon class="post-icon followed hover" name="bookmark"></ion-icon>
+                    </div>
+                </div>
+                {% comment %} <p class="post-author">squeextv</p> {% endcomment %}
+                <div class="post-tags">
+                    <p class="tag hover">#lifestyle<p>
+                    <p class="tag hover">#programming<p>
+                    <p class="tag hover">#diy<p>
+                </div>
+                <span class="post-content">she never showed up...</span>
+                {% comment %}
+                    <div class="comment">
+                    <p class="comm-author hover">johnny:</p>
+                    <p class="comm-text">Yeah, that would happen to you</p>
+                </div>
+                {% endcomment %}
+                {% comment %} <span class="translate">Translate</span> {% endcomment %}
+                {% comment %} <span class="see-all underline-hover">See all comments: 48</span> {% endcomment %}
+                {% comment %} <div>
+                    <span class="add-comment underline-hover">add a comment</span>
+                </div> {% endcomment %}
+            </div>
+        </div>
+        <div class="comments">
+            <div class="comment">
+                <p class="comm-author hover">johnny:</p>
+                <p class="comm-text">Yeah, that would happen to you</p>
+                <ion-icon class="comm-icon liked hover" name="heart"></ion-icon>
+                <ion-icon class="comm-icon unliked hover" name="heart-outline"></ion-icon>
+                <span class="comm-likes">3</span>
+            </div>
+            <div class="comment">
+                <p class="comm-author hover">johnny:</p>
+                <p class="comm-text">Yeah, that would happen to you</p>
+                <ion-icon class="comm-icon liked hover" name="heart"></ion-icon>
+                <ion-icon class="comm-icon unliked hover" name="heart-outline"></ion-icon>
+                <span class="comm-likes">3</span>
+            </div>
+            <span class="add-comment underline-hover">add a comment</span>
+        </div>
+
+    </main>
+{% endblock content %}

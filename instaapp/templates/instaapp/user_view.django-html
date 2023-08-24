@@ -1,0 +1,42 @@
+{% extends 'base.django-html' %}
+{% load static %}
+{% block title %} User view {% endblock title%}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'instaapp/user.css' %}">
+{% endblock styles %}
+{% block content %}
+    <main class="main-user">
+        <div class="user-div">
+            <div class="user-div-left">
+                <img class="user-img">
+            </div>
+            <div class="user-div-right">
+                <div class="right-top">
+                    <div class="right-top-left">
+                        <p class="author">Vivek Rama</p>
+                        <p class="user-info">@squeextv</p>
+                    </div>
+                    <p class="user-info">since 27.11.2018</p>
+                </div>
+                <div class="right-bottom">
+                    <p class="user-info">Information about the user</p>
+                    <p class="user-info-bold">Likes: 4233<p>
+                    <div class="right-top-left">
+                        <p class="user-info-bold">following: 4</p>
+                        <p class="user-info-bold">followed by: 3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <container class="grid">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+        </container>
+    </main>
+{% endblock content %}

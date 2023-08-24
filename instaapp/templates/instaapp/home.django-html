@@ -2,10 +2,109 @@
 {% load static %}
 {% block title %} Home view {% endblock title%}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'instapp/home.css' %}">
+<link rel="stylesheet" href="{% static 'instaapp/home.css' %}">
 {% endblock styles %}
 {% block content %}
     <main class="main-home">
-        <p>Hello there, Home</p>
+        <header class="tab-header">
+            <span class="tab active hover">For You</span>
+            <span class="tab hover">Followed</span>
+        </header>
+
+        <div class="reels">
+            <div class="reel hover">
+                <img class="reel-av">
+                <p class="reel-author">coffeeneed</p>
+            </div>
+            <div class="reel hover">
+                <img class="reel-av">
+                <p class="reel-author">fezemusic</p>
+            </div>
+        </div>
+
+        <container class="posts">
+            <div class="post">
+                <div class="post-top">
+                    <div class="post-top-left">
+                        <img class="post-av">
+                        <p class="post-author hover">squeextv</p>
+                        <p class="post-time">15 hr ago</p>
+                    </div>
+                    <ion-icon class="post-icon hover" name="ellipsis-horizontal"></ion-icon>
+                </div>
+                <img class="post-img">
+                <div class="post-bottom">
+                    <div class="post-bottom-icons">
+                        <div class="icons-left">
+                            <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
+                            <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
+                            <span class="likes">Likes: 337</span>
+                            {% comment %} <ion-icon class="post-icon" name="chatbubble-outline"></ion-icon> {% endcomment %}
+                            {% comment %} <ion-icon class="post-icon" name="navigate-outline"></ion-icon> {% endcomment %}
+                        </div>
+                        <div>
+                            <ion-icon class="post-icon hover" name="bookmark-outline"></ion-icon>
+                            <ion-icon class="post-icon followed hover" name="bookmark"></ion-icon>
+                        </div>
+                    </div>
+                    {% comment %} <p class="post-author">squeextv</p> {% endcomment %}
+                    <div class="post-tags">
+                        <p class="tag hover">#lifestyle<p>
+                        <p class="tag hover">#programming<p>
+                        <p class="tag hover">#diy<p>
+                    </div>
+                    <span class="post-content">she never showed up...</span>
+                    <div class="comment">
+                        <p class="comm-author hover">johnny:</p>
+                        <p class="comm-text">Yeah, that would happen to you</p>
+                    </div> 
+                    {% comment %} <span class="translate">Translate</span> {% endcomment %}
+                    <span class="see-all underline-hover">See all comments: 48</span>
+                    <div>
+                        <span class="add-comment underline-hover">add a comment</span>
+                        {% comment %} <ion-icon name="happy-outline"></ion-icon> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+            <div class="post">
+                <div class="post-top">
+                    <div class="post-top-left">
+                        <img class="post-av">
+                        <p class="post-author">squeextv</p>
+                        <p class="post-time">15 hr</p>
+                    </div>
+                    <ion-icon class="post-icon" name="ellipsis-horizontal"></ion-icon>
+                </div>
+                <img class="post-img">
+                <div class="post-bottom">
+                    <div class="post-bottom-icons">
+                        <div class="icons-left">
+                            <ion-icon class="post-icon liked" name="heart"></ion-icon>
+                            <span class="likes">Likes: 337</span>
+                            {% comment %} <ion-icon class="post-icon" name="chatbubble-outline"></ion-icon> {% endcomment %}
+                            {% comment %} <ion-icon class="post-icon" name="navigate-outline"></ion-icon> {% endcomment %}
+                        </div>
+                        <ion-icon class="post-icon" name="bookmark-outline"></ion-icon>
+                    </div>
+                    {% comment %} <p class="post-author">squeextv</p> {% endcomment %}
+                    <div class="post-tags">
+                        <p class="tag hover">#lifestyle<p>
+                        <p class="tag hover">#programming<p>
+                        <p class="tag hover">#diy<p>
+                    </div>
+                    <span class="post-content">she never showed up...</span>
+                    <div class="comment">
+                        <p class="comm-author">johnny:</p>
+                        <p class="comm-text">Yeah, that would happen to you</p>
+                    </div> 
+                    {% comment %} <span class="translate">Translate</span> {% endcomment %}
+                    <span class="see-all underline-hover">See all comments: 48</span>
+                    <div>
+                        <span class="add-comment underline-hover">add a comment</span>
+                        {% comment %} <ion-icon name="happy-outline"></ion-icon> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </container>
     </main>
 {% endblock content%}

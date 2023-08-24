@@ -38,18 +38,25 @@ tints and shades: https://maketintsandshades.com/#000000,EF233C,3C91E6,F9C846,2D
     display: flex;
 }
 
-.main-content{
-    padding: 4rem 12rem;
+/* .main-content{
+    padding: 40px 120px;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-}
+} */
 
 .hover:hover{
     filter: brightness(0.5);
+    cursor: pointer;
+}
+
+.underline-hover:hover{
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
     cursor: pointer;
 }
 

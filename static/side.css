@@ -7,6 +7,7 @@
     width: clamp(40px, 8vw, 100px);
     height: 100%;
     border-right: 1px solid var(--gray-lighter);
+    gap: 25px;
 }
 
 .side-top{
@@ -16,24 +17,19 @@
     gap: 60px;
 }
 
-.side-nav{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
 .side-icon{
     font-size: 30px;
     color: var(--gray-dark);
 }
 
 .logo{
+    color: var(--black);
     font-size: 40px;
     align-self: center;
 }
 
 .av{
-    background-color: lightgray;
+    background-color: var(--gray-light);
     width: 30px;
     height: 30px;
     border-radius: 50%;

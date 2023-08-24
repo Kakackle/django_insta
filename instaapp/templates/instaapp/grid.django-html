@@ -1,0 +1,32 @@
+{% extends 'base.django-html' %}
+{% load static %}
+{% block title %} Grid view {% endblock title%}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'instaapp/grid.css' %}">
+{% endblock styles %}
+{% block content %}
+    <main class="main-grid">
+        <header class="tab-header">
+            <span class="tab active hover">For You</span>
+            <span class="tab hover">Followed</span>
+        </header>
+
+        <div class="controls">
+            <div class="search-div">
+                <input type="search" class="search" placeholder="lifestyle">
+                <ion-icon class="search-icon hover" name="search-outline"></ion-icon>
+            </div>
+        </div>
+
+        <container class="grid">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+            <img class="grid-img hover">
+        </container>
+    </main>
+{% endblock content%}
