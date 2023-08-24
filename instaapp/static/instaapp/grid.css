@@ -79,5 +79,6 @@
     aspect-ratio: 2/3; */
     height: 400px;
     width: 300px;
+    object-fit: cover;
     background-color: var(--gray-lighter);
 }

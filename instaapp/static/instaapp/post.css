@@ -65,6 +65,7 @@
     background-color: var(--gray-lighter);
     height: 100%;
     width: 400px;
+    object-fit: cover;
     /* object-fit: contain; */
     /* aspect-ratio: ; */
 }

@@ -23,7 +23,7 @@ class Tag(models.Model):
 # sprecyzowanie folderu do ktorego beda uploadowane pliki
 def upload_to_post(instance, filename):
     random_str = get_random_string(length=8)
-    return 'images/posts/{filename}-{random}'.format(
+    return 'images/posts/{random}-{filename}'.format(
         filename=filename, random=random_str)
 
 class Post(models.Model):

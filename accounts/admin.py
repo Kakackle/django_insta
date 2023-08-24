@@ -1,6 +1,6 @@
 from django.contrib import admin
 from instaapp.models import *
-from accounts.models import *
+from users.models import *
 
 from django.apps import apps
 
