@@ -28,3 +28,5 @@ i wtedy sprawdzanie w form czy tak istnieje czy nie musialoby byc i jak nie to p
 TODO: poki co cover img w poscie a nie oddzielny model ,bo nie potrzebuje, fajne to jest gdy masz serializator i API z ktorego mozna ciagnac tylko obrazki itd
 
 TODO: dodanie obslugi filtrow z opencv, tylko wtedy by trzeba jakis custom form z przyciskami izeby wyswietlalo od razu tego rezultaty na przeslanym obrazku?
+
+TODO: checki zeby jesli nie ma zalogowanego uzytkownika to nie wywalalo bledow, ze anonymous user nie ma pol "followed" etc
