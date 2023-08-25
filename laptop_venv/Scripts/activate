@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\marko\Desktop\django_insta\django_insta\insta_venv_laptop"
+VIRTUAL_ENV="C:\Users\marko\Desktop\django_insta\django_insta\laptop_venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
@@ -55,9 +55,9 @@ fi
 
 if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
     _OLD_VIRTUAL_PS1="${PS1:-}"
-    PS1="(insta_venv_laptop) ${PS1:-}"
+    PS1="(laptop_venv) ${PS1:-}"
     export PS1
-    VIRTUAL_ENV_PROMPT="(insta_venv_laptop) "
+    VIRTUAL_ENV_PROMPT="(laptop_venv) "
     export VIRTUAL_ENV_PROMPT
 fi
 
