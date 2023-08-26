@@ -30,8 +30,10 @@
         </div>
         {% if user.posts %}
         <container class="grid">
-            {% for post in user.posts.all %}
-                <img class="grid-img hover" src="{{post.post_image.url}}">
+            {% for post in user.posts.all|dictsortreversed:"date_posted" %}
+                <a href="{% url 'instaapp:post' post_slug=post.slug %}">
+                    <img class="grid-img hover" src="{{post.post_image.url}}">
+                </a>
             {% endfor %}
             {% comment %} <img class="grid-img hover">
             <img class="grid-img hover">

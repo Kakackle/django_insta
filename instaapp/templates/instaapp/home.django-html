@@ -10,18 +10,35 @@
 {% block content %}
     <main class="main-home">
         <header class="tab-header">
-            <span class="tab active hover">For You</span>
-            <span class="tab hover">Followed</span>
+            {% comment %} {% if followed %}
+            <a class="tab hover"
+            href="{% url 'instaapp:home' %}">For You</a>
+            <a class="tab hover active"
+            href="{% url 'instaapp:home' %}?followed=True">Followed</a>
+            {% else %}
+            <a class="tab hover active"
+            href="{% url 'instaapp:home' %}">For You</a>
+            <a class="tab hover"
+            href="{% url 'instaapp:home' %}?followed=True">Followed</a>
+            {% endif %} {% endcomment %}
+            
+            <a class="tab hover {% if not followed %} active {% endif %}"
+             href="{% url 'instaapp:home' %}">For You</a>
+            <a class="tab hover {% if followed %} active {% endif %}"
+             href="{% url 'instaapp:home' %}?followed=True">Followed</a>
+
         </header>
         {% comment %} TODO: list of links to last post by followed users?
          in reels form {% endcomment %}
         {% if followed_users %}
         <div class="reels">
             {% for fuser in followed_users%}
-            <div class="reel hover">
+            {% comment %} <div class="reel hover" onclick=location.href={% url 'users:user_view' user_slug=fuser.username %}> {% endcomment %}
+            {% comment %} <a class="reel hover" href="{% url 'users:user_view' user_slug=fuser.username %}"> {% endcomment %}
+            <a class="reel hover" href="{% url 'instaapp:post' post_slug=fuser.posts.last.slug %}">
                 <img class="reel-av" src="{{fuser.profile.profile_img.url}}">
                 <p class="reel-author">{{fuser.username}}</p>
-            </div>
+            </a>
             {% endfor %}
             {% comment %} <div class="reel hover">
                 <img class="reel-av">
@@ -32,16 +49,17 @@
         {% if posts %}
         <container class="posts infinite-container">
             {% for post in posts %}
-            <div class="post infinite-item">
+            <div class="post infinite-item" href="{% url 'instaapp:post' post_slug=post.slug %}">
                 <div class="post-top">
                     <div class="post-top-left">
                         <img class="post-av" src="{{post.author.profile.profile_img.url}}">
-                        <p class="post-author hover">{{post.author.username}}</p>
+                        <a class="post-author hover" href="{% url 'users:user_view' user_slug=post.author.username %}">
+                            {{post.author.username}}</a>
                         <p class="post-time">{{post.date_created|naturaltime}}</p>
                     </div>
                     <ion-icon class="post-icon hover" name="ellipsis-horizontal"></ion-icon>
                 </div>
-                <img class="post-img" src="{{post.post_image.url}}">
+                <a href="{% url 'instaapp:post' post_slug=post.slug %}"><img class="post-img" src="{{post.post_image.url}}"></a>
                 <div class="post-bottom">
                     <div class="post-bottom-icons">
                         <div class="icons-left">
@@ -73,14 +91,14 @@
                     {% endif %}
                     <span class="post-content">{{post.description}}</span>
                     {% if post.comments %}
+                    {% for comment in post.comments.all|slice:"5" %}
                     <div class="comment">
-                        {% for comment in post.comments.all %}
                         <p class="comm-author hover">{{comment.author.username}}:</p>
                         <p class="comm-text">{{comment.message}}</p>
-                        {% endfor %}
                         {% comment %} <p class="comm-author hover">johnny:</p>
                         <p class="comm-text">Yeah, that would happen to you</p> {% endcomment %}
                     </div>
+                    {% endfor %}
                     {% else %}
                         <p>No comments yet</p>
                     {% endif %}

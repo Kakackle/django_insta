@@ -32,6 +32,11 @@ tints and shades: https://maketintsandshades.com/#000000,EF233C,3C91E6,F9C846,2D
     --section-bottom: 20px;
 }
 
+a, a:hover, a:active {
+    color: inherit;
+    text-decoration: none;
+   }
+
 .main-base{
     height: 100vw;
     width: 100vw;

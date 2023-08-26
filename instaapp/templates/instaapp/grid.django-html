@@ -7,26 +7,29 @@
 {% block content %}
     <main class="main-grid">
         <header class="tab-header">
-            <span class="tab active hover">For You</span>
-            <span class="tab hover">Followed</span>
+            <a class="tab hover {% if not followed and not liked %} active {% endif %}"
+             href="{% url 'instaapp:grid' %}">For You</a>
+            <a class="tab hover {% if followed %} active {% endif %}"
+             href="{% url 'instaapp:grid' %}?followed=True">Followed</a>
+            <a class="tab hover {% if liked %} active {% endif %}"
+             href="{% url 'instaapp:grid' %}?liked=True">Liked</a>
         </header>
 
         <div class="controls">
-            <div class="search-div">
-                <input type="search" class="search" placeholder="lifestyle">
-                <ion-icon class="search-icon hover" name="search-outline"></ion-icon>
-            </div>
+            <form class="search-div" action="{% url 'instaapp:grid' %}" method="get">
+                <input type="search" class="search" name="search" placeholder="lifestyle">
+                <input type="submit"><ion-icon class="search-icon hover"
+                 name="search-outline"></ion-icon></input>
+            </form>
         </div>
-
+        {% if posts %}
         <container class="grid">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
-            <img class="grid-img hover">
+            {% for post in posts %}
+                <a href="{% url 'instaapp:post' post_slug=post.slug %}">
+                    <img class="grid-img hover" src="{{post.post_image.url}}">
+                </a>
+            {% endfor %}
         </container>
+        {% endif %}
     </main>
 {% endblock content%}

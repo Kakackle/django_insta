@@ -57,20 +57,20 @@
 }
 
 .grid{
-    /*
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    width: 100%;
-    padding: 20px; 
-    column-gap: 5px;
-    row-gap: 5px;
-    */
-
-    display: flex;
+    /* with flexbox */
+    /* display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    width: 100%; */
+
+    /* with grid */
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+    grid-gap: 10px;
+    justify-content: center;
+    padding: initial;
 }
 
 .grid-img{

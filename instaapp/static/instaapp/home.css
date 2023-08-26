@@ -15,6 +15,7 @@
     justify-content: start;
     width: 100%;
     border-bottom: 1px solid var(--gray-lighter);
+    color: var(--gray-light);
     padding-bottom: 10px;
 }
 
@@ -52,6 +53,8 @@
 
 .reel-author{
     font-size: 12px;
+    color: var(--almost-black);
+    font-weight: 500;
 }
 
 .posts{

@@ -16,15 +16,15 @@
     <main class="main-base">
         <nav class="side-nav">
             <div class="side-top">
-                <ion-icon class="side-icon logo hover" name="logo-instagram"></ion-icon>
+                <a class="side-icon logo" href="{% url 'instaapp:home' %}"><ion-icon class="side-icon logo hover" name="logo-instagram"></ion-icon></a>
                 <div class="side-nav">
-                    <ion-icon class="side-icon hover" name="home"></ion-icon>
-                    <ion-icon class="side-icon hover" name="search-outline"></ion-icon>
-                    <ion-icon class="side-icon hover" name="compass-outline"></ion-icon>
-                    <ion-icon class="side-icon hover" name="navigate-outline"></ion-icon>
-                    <ion-icon class="side-icon hover" name="heart-outline"></ion-icon>
-                    <ion-icon class="side-icon hover" name="add-circle-outline"></ion-icon>
-                    <img class="av hover">
+                    <a href="{% url 'instaapp:home' %}"><ion-icon class="side-icon hover" name="home"></ion-icon></a>
+                    <a href="{% url 'instaapp:grid' %}"><ion-icon class="side-icon hover" name="search-outline"></ion-icon></a>
+                    <a href="#"><ion-icon class="side-icon hover" name="compass-outline"></ion-icon></a>
+                    <a href="{% url 'instaapp:home' %}/?followed=True"><ion-icon class="side-icon hover" name="navigate-outline"></ion-icon></a>
+                    <a href="#"><ion-icon class="side-icon hover" name="heart-outline"></ion-icon></a>
+                    <a href="#"><ion-icon class="side-icon hover" name="add-circle-outline"></ion-icon></a>
+                    <a href="#"><img class="av hover"></a>
                 </div>
             </div>
             <ion-icon class="side-icon hover" name="menu-outline"></ion-icon>
