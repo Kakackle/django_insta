@@ -1,7 +1,3 @@
-TODO: Dodac tagi pod postami
-
-TODO: przekazywanie danych do views, urls z parametrami itd
-
 TODO: views zwiazane z logowaniem i rejestracja
 
 TODO: form views
@@ -10,11 +6,19 @@ TODO: rozwijalna js form na komentarz?
 
 TODO: users list view
 
-TODO: Obsluga tabow wszystkie posty / od followowanych? - wlasciwie to wystarczy, by po kliknieciu przechodzilo do strony z dodanym query w url by filtrowalo tylko po followowanych, ktore bedzie wygladalo identycznie jak zwykle home, ale z zaznaczonym "followed" oraz w context przekazywanym innym zbiorem
+TODO: ogbsluga lajkow wszedzie
 
-TODO: modele
+TODO: obsluga followow tak jak faljkow
 
-TODO: dodac do modelu komentow lajki
+TODO: stylizacja przyciskow like i submit search na gridzie
+
+FIXME: aktualnie obsluga infinite scrolla z waypoints nie dodaje ?page=.. do linku w browser wiec redirect do tej strony tez tego nie zawiera i wraca na sama gore - trzeba by jakos moze zrealizowac lajkowanie w glownym view, ktore zawiera parametr page?
+
+albo przesylac parametr page w form?
+
+TODO: kwestia lajkowania - jak lajkujesz, to mozesz zmienic stan na backendzie, ale zeby zaktualizowalo sie na froncie trzeba odswiezyc strone, ale co z pozycja na stronie? aktualnie jest to realizowane poprzez paginacje, wiec powinno sie dac zrobic to tak by w redirect przekazywalo takie page jakie bylo
+
+TODO: tag list view i przenoszenie do strony z postami przefiltrowanymi przez ten tag (wystarczy grid)
 
 TODO: posty polubione jako po prostu grid z query ze polubione przez uzytkownika?
 
@@ -25,8 +29,6 @@ ale fajnie gdyby uzytkownik mogl tworzyc nowe w locie, idk: moze jakies dodatkow
 albo tylko wpisywanie i max 3 tagi, bo luj, niech uzytkownik mysli jakie tagi dac?
 i wtedy sprawdzanie w form czy tak istnieje czy nie musialoby byc i jak nie to przypisanie
 
-TODO: poki co cover img w poscie a nie oddzielny model ,bo nie potrzebuje, fajne to jest gdy masz serializator i API z ktorego mozna ciagnac tylko obrazki itd
+FIXME: poki co cover img w poscie a nie oddzielny model ,bo nie potrzebuje, fajne to jest gdy masz serializator i API z ktorego mozna ciagnac tylko obrazki itd
 
 TODO: dodanie obslugi filtrow z opencv, tylko wtedy by trzeba jakis custom form z przyciskami izeby wyswietlalo od razu tego rezultaty na przeslanym obrazku?
-
-TODO: checki zeby jesli nie ma zalogowanego uzytkownika to nie wywalalo bledow, ze anonymous user nie ma pol "followed" etc

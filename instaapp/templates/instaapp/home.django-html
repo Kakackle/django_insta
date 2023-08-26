@@ -63,10 +63,22 @@
                 <div class="post-bottom">
                     <div class="post-bottom-icons">
                         <div class="icons-left">
-                            {% if post in user.liked_posts %}
-                            <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
+                            {% if post in user.liked_posts.all %}
+                            <form action="{% url 'instaapp:unlike_post' post_slug=post.slug %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="page" value="{{page}}">
+                                <button class="like-button" type="submit">
+                                    <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
+                                </button>
+                            </form>
                             {% else %}
-                            <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
+                            <form action="{% url 'instaapp:like_post' post_slug=post.slug %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="page" value="{{page}}">
+                                <button class="like-button" type="submit">
+                                    <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
+                                </button>
+                            </form>
                             {% endif %}
                             <span class="likes">{{post.like_count}}</span>
                             {% comment %} <ion-icon class="post-icon" name="chatbubble-outline"></ion-icon> {% endcomment %}

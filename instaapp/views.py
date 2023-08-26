@@ -1,7 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.http import Http404
+from django.http import HttpResponseRedirect
 from instaapp.models import Post, Comment, Tag
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from users.models import UserProfile, Following
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -26,6 +28,9 @@ def home_view(request):
     page = request.GET.get('page', 1)
     paginator = Paginator(posts_all, 4)
 
+    liked_posts = request.user.liked_posts.all()
+    print('liked_posts ',liked_posts)
+
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -37,7 +42,8 @@ def home_view(request):
         "posts": posts,
         "user": request.user,
         "followed_users": followed_users,
-        "followed": followed
+        "followed": followed,
+        "page": page
     }
     return render(request, "instaapp/home.django-html", context)
 
@@ -79,6 +85,45 @@ def grid_view(request):
                "followed": followed,
                "liked": liked}
     return render(request, "instaapp/grid.django-html", context)
+
+@login_required()
+def like_view(request, post_slug):
+    try:
+        post = get_object_or_404(Post, slug=post_slug)
+    except Http404:
+        return redirect('instaapp:home')
+    page = 1
+    if request.POST:
+        if request.user not in post.liked_by.all():
+            post.liked_by.add(request.user)
+            post.like_count += 1
+            post.save()
+            request.user.liked_posts.add(post)
+            request.user.save()
+        
+    page = request.POST.get("page", 1)
+
+    return HttpResponseRedirect('/?page={}'.format(page))
+    # return redirect(request.META.get('HTTP_REFERER', 'instaapp:grid'))
+
+def unlike_view(request, post_slug):
+    try:
+        post = get_object_or_404(Post, slug=post_slug)
+    except Http404:
+        return redirect('instaapp:home')
+    page = 1
+    if request.POST:
+            if request.user in post.liked_by.all():
+                post.liked_by.remove(request.user)
+                post.like_count -= 1
+                post.save()
+                request.user.liked_posts.remove(post)
+                request.user.save()
+    page = request.POST.get("page", 1)
+
+    return HttpResponseRedirect('/?page={}'.format(page))
+
+    # return redirect(request.META.get('HTTP_REFERER', 'instaapp:home'))
 
 def post_view(request, post_slug):
     try:
