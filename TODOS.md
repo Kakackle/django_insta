@@ -1,5 +1,7 @@
 TODO: views zwiazane z logowaniem i rejestracja
 
+TODO: przejscia miedzy profilem a edycja profilu a edycja konta (rozne rzeczy - dodac linki w profile view itd)
+
 TODO: form views
 
 TODO: rozwijalna js form na komentarz?

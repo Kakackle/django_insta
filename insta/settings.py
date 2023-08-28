@@ -110,6 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# wskazujesz gdzie ma przejsc bo wbudyowanym wylogowaniu
+LOGOUT_REDIRECT_URL = 'instaapp:home'
+LOGIN_REDIRECT_URL = 'instaapp:home'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

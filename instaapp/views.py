@@ -15,8 +15,13 @@ def home_view(request):
         followed_users_pks = list(request.user.followed.all()\
                                 .values_list('followed_user', flat=True))
         followed_users = User.objects.filter(pk__in=followed_users_pks)
+
+        liked_posts = request.user.liked_posts.all()
+        print('liked_posts ',liked_posts)
+
     else:
         followed_users = []
+        liked_posts = []
     # print('followed: ', followed_users)
 
     followed = request.GET.get('followed', False)
@@ -60,6 +65,7 @@ def grid_view(request):
         liked_posts = request.user.liked_posts
     else:
         followed_users = []
+        liked_posts = []
     # print('followed: ', followed_users)
 
     followed = request.GET.get('followed', False)

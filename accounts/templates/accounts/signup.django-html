@@ -1,0 +1,22 @@
+{% extends 'base.django-html' %}
+{% load static %}
+{% block title %} Signup {% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+{% endblock styles %}
+
+{% block body %}
+    {% load crispy_forms_tags %}
+    <main class="main">
+        <h1> Sign up </h1>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-primary hover">CREATE ACCOUNT</button>
+        </form>
+        <div class="card-footer text-muted text-center">
+            Already have an account? <a href="{% url 'accounts:login' %}">Log in</a>
+          </div>
+  
+    </main>
+{% endblock body %}
