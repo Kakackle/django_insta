@@ -46,7 +46,7 @@
                 <div class="post-tags">
                     {% for tag in post.tags.all %}
                         {% comment %} <p class="tag hover">#lifestyle<p> {% endcomment %}
-                        <p class="tag hover">#{{tag.name}}<p>
+                        <a class="tag hover" href="{% url 'instaapp:grid' %}?search={{tag.name}}">#{{tag.name}}</a>
                     {% endfor %}
                 </div>
                 {% endif %}

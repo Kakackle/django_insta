@@ -2,7 +2,11 @@ TODO: views zwiazane z logowaniem i rejestracja
 
 TODO: przejscia miedzy profilem a edycja profilu a edycja konta (rozne rzeczy - dodac linki w profile view itd)
 
+TODO:: dodac obsluge przyjmowania obrazow w trakcie registration form
+
 TODO: form views
+
+TODO: przerzuc posty na komponent includes, bo poki co w dwoch miejscach zmiany ale moze zrobic sie wiecej
 
 TODO: rozwijalna js form na komentarz?
 
@@ -20,7 +24,7 @@ albo przesylac parametr page w form?
 
 TODO: kwestia lajkowania - jak lajkujesz, to mozesz zmienic stan na backendzie, ale zeby zaktualizowalo sie na froncie trzeba odswiezyc strone, ale co z pozycja na stronie? aktualnie jest to realizowane poprzez paginacje, wiec powinno sie dac zrobic to tak by w redirect przekazywalo takie page jakie bylo
 
-TODO: tag list view i przenoszenie do strony z postami przefiltrowanymi przez ten tag (wystarczy grid)
+TODO: tag list view i przenoszenie do strony z postami przefiltrowanymi przez ten tag (wystarczy grid) - priorytet
 
 TODO: posty polubione jako po prostu grid z query ze polubione przez uzytkownika?
 

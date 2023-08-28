@@ -33,9 +33,6 @@ def home_view(request):
     page = request.GET.get('page', 1)
     paginator = Paginator(posts_all, 4)
 
-    liked_posts = request.user.liked_posts.all()
-    print('liked_posts ',liked_posts)
-
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
