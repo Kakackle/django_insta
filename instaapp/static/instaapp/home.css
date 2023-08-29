@@ -65,9 +65,8 @@
     gap: 10px;
 }
 
-.post{
+/* .post{
     width: 450px;
-    /* height: 100%; */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -101,7 +100,6 @@
 
 .post-time{
     font-weight: 300;
-    /* color: lightgray; */
 }
 
 .post-icon{
@@ -183,4 +181,4 @@
 
 .followed{
     color: var(--blue-dark);
-}
+} */

@@ -34,7 +34,7 @@ class Post(models.Model):
     description = models.CharField(max_length=1000, null=True)
     post_image = models.ImageField(null=True, blank=True,
                                     upload_to=upload_to_post)
-    tags = models.ManyToManyField(Tag, related_name="posts")
+    tags = models.ManyToManyField(Tag, related_name="posts", blank=True)
     slug = models.SlugField(unique=True, default='temp')
     comment_count = models.PositiveIntegerField(default=0, blank = True)
     view_count = models.PositiveIntegerField(default=0, blank = True)

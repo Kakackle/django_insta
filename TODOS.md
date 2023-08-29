@@ -1,18 +1,11 @@
-TODO: przejscia miedzy profilem a edycja profilu a edycja konta (rozne rzeczy - dodac linki w profile view itd)
+TODO: dodawanie komentow
 
-TODO:: dodac obsluge przyjmowania obrazow w trakcie registration form?
+TODO: lajkowanie komentow
 
-TODO: form views
-
-TODO: restriced names for users etc (zeby slug nie konflikowal z funkcjonalnosciami)
-
-TODO: przerzuc posty na komponent includes, bo poki co w dwoch miejscach zmiany ale moze zrobic sie wiecej
+FIXME: aktualnie po zlajkowaniu wraca na home z page, ale mozesz tez lajkowac w poscie i z postu wraca do home i chuj, tak byc nie moze
 
 TODO: rozwijalna js form na komentarz?
 
-TODO: users list view
-
-TODO: ogbsluga lajkow wszedzie
 
 TODO: obsluga followow tak jak faljkow
 
@@ -24,9 +17,6 @@ albo przesylac parametr page w form?
 
 TODO: kwestia lajkowania - jak lajkujesz, to mozesz zmienic stan na backendzie, ale zeby zaktualizowalo sie na froncie trzeba odswiezyc strone, ale co z pozycja na stronie? aktualnie jest to realizowane poprzez paginacje, wiec powinno sie dac zrobic to tak by w redirect przekazywalo takie page jakie bylo
 
-TODO: tag list view i przenoszenie do strony z postami przefiltrowanymi przez ten tag (wystarczy grid) - priorytet
-
-TODO: posty polubione jako po prostu grid z query ze polubione przez uzytkownika?
 
 TODO: jak zrealizowac dodawanie nowych tagow z predefiniowanymi forms z crispy itd? bo select zalatwia a tworzenie? musialbym miec oddzielne form dla uzytkownika i gdzies je jakos umiescic
 

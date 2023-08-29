@@ -3,33 +3,19 @@
 {% block title %} Home view {% endblock title%}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'instaapp/home.css' %}">
+<link rel="stylesheet" href="{% static 'instaapp/post.css' %}">
 {% endblock styles %}
 
 {% load humanize %}
 
 {% block content %}
     <main class="main-home">
-        <header class="tab-header">
-            {% comment %} {% if followed %}
-            <a class="tab hover"
-            href="{% url 'instaapp:home' %}">For You</a>
-            <a class="tab hover active"
-            href="{% url 'instaapp:home' %}?followed=True">Followed</a>
-            {% else %}
-            <a class="tab hover active"
-            href="{% url 'instaapp:home' %}">For You</a>
-            <a class="tab hover"
-            href="{% url 'instaapp:home' %}?followed=True">Followed</a>
-            {% endif %} {% endcomment %}
-            
+        <header class="tab-header">       
             <a class="tab hover {% if not followed %} active {% endif %}"
              href="{% url 'instaapp:home' %}">For You</a>
             <a class="tab hover {% if followed %} active {% endif %}"
              href="{% url 'instaapp:home' %}?followed=True">Followed</a>
-
         </header>
-        {% comment %} TODO: list of links to last post by followed users?
-         in reels form {% endcomment %}
         {% if followed_users %}
         <div class="reels">
             {% for fuser in followed_users%}
@@ -49,88 +35,8 @@
         {% if posts %}
         <container class="posts infinite-container">
             {% for post in posts %}
-            <div class="post infinite-item" href="{% url 'instaapp:post' post_slug=post.slug %}">
-                <div class="post-top">
-                    <div class="post-top-left">
-                        <img class="post-av" src="{{post.author.profile.profile_img.url}}">
-                        <a class="post-author hover" href="{% url 'users:user_view' user_slug=post.author.username %}">
-                            {{post.author.username}}</a>
-                        <p class="post-time">{{post.date_created|naturaltime}}</p>
-                    </div>
-                    <ion-icon class="post-icon hover" name="ellipsis-horizontal"></ion-icon>
-                </div>
-                <a href="{% url 'instaapp:post' post_slug=post.slug %}"><img class="post-img" src="{{post.post_image.url}}"></a>
-                <div class="post-bottom">
-                    <div class="post-bottom-icons">
-                        <div class="icons-left">
-                            {% if user.is_authenticated %}
-                                {% if post in user.liked_posts.all %}
-                                <form action="{% url 'instaapp:unlike_post' post_slug=post.slug %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="page" value="{{page}}">
-                                    <button class="like-button" type="submit">
-                                        <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
-                                    </button>
-                                </form>
-                                {% else %}
-                                <form action="{% url 'instaapp:like_post' post_slug=post.slug %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="page" value="{{page}}">
-                                    <button class="like-button" type="submit">
-                                        <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
-                                    </button>
-                                </form>
-                                {% endif %}
-                                <span class="likes">{{post.like_count}}</span>
-                            {% else %}
-                            <form action="{% url 'instaapp:like_post' post_slug=post.slug %}" method="post">
-                                {% csrf_token %}
-                                <input type="hidden" name="page" value="{{page}}">
-                                <button class="like-button" type="submit">
-                                    <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
-                                </button>
-                            </form>
-                            {% endif %}
-                            {% comment %} <ion-icon class="post-icon" name="chatbubble-outline"></ion-icon> {% endcomment %}
-                            {% comment %} <ion-icon class="post-icon" name="navigate-outline"></ion-icon> {% endcomment %}
-                        </div>
-                        <div>
-                            {% if user in followed_users %}
-                            <ion-icon class="post-icon followed hover" name="bookmark"></ion-icon>
-                            {% else %}
-                            <ion-icon class="post-icon hover" name="bookmark-outline"></ion-icon>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% comment %} <p class="post-author">squeextv</p> {% endcomment %}
-                    {% if post.tags %}
-                    <div class="post-tags">
-                        {% for tag in post.tags.all %}
-                            {% comment %} <p class="tag hover">#lifestyle<p> {% endcomment %}
-                            <a class="tag hover" href="{% url 'instaapp:grid' %}?search={{tag.name}}">#{{tag.name}}<a>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
-                    <span class="post-content">{{post.description}}</span>
-                    {% if post.comments %}
-                    {% for comment in post.comments.all|slice:"5" %}
-                    <div class="comment">
-                        <p class="comm-author hover">{{comment.author.username}}:</p>
-                        <p class="comm-text">{{comment.message}}</p>
-                        {% comment %} <p class="comm-author hover">johnny:</p>
-                        <p class="comm-text">Yeah, that would happen to you</p> {% endcomment %}
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                        <p>No comments yet</p>
-                    {% endif %}
-                    {% comment %} <span class="translate">Translate</span> {% endcomment %}
-                    <span class="see-all underline-hover">See all comments: {{post.comment_count}}</span>
-                    <div>
-                        <span class="add-comment underline-hover">add a comment</span>
-                        {% comment %} <ion-icon name="happy-outline"></ion-icon> {% endcomment %}
-                    </div>
-                </div>
+            <div class="infinite-item">
+            {% include 'instaapp/includes/post.django-html' with post=post followed_users=followed_users %}
             </div>
             {% endfor %}
         </container>

@@ -16,12 +16,6 @@
                         <p class="author">{{user.first_name}} {{user.last_name}}</p>
                         <p class="user-info">@{{user.username}}</p>
                     </div>
-                    <div class="right-top-right">
-                        <p class="user-info">since {{user.profile.date_created}}</p>
-                        {% if request.user == user%}
-                            <a class="user-controls" href="{% url 'accounts:account_edit' %}">Edit profile</a>
-                        {% endif %}
-                    </div>
                 </div>
                 <div class="right-bottom">
                     <p class="user-info">{{user.profile.bio}}</p>
@@ -32,6 +26,17 @@
                     </div>
                 </div>
             </div>
+            <div class="right-top-right">
+                <p class="user-info">since {{user.profile.date_created}}</p>
+                {% if request.user == user%}
+                    <a class="user-controls" href="{% url 'accounts:account_edit' %}">Edit profile</a>
+                    <a class="user-controls" href="{% url 'accounts:password' %}">Change password</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="add-post">
+            <ion-icon name="add-circle-outline" class="add-icon"></ion-icon>
+            <a class="add-icon hover" href="{% url 'instaapp:create' %}">ADD A NEW POST </a>
         </div>
         {% if user.posts %}
         <container class="grid">

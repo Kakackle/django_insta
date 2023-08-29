@@ -9,7 +9,8 @@
 
 {% block content %}
     <main class="main-post">
-        <div class="post">
+        {% include 'instaapp/includes/post.django-html' with post=post followed_users=followed_users %}
+        {% comment %} <div class="post">
             <div class="post-top">
                 <div class="post-top-left">
                     <img class="post-av" src="{{post.author.profile.profile_img.url}}">
@@ -25,7 +26,6 @@
             <div class="post-bottom">
                 <div class="post-bottom-icons">
                     <div class="icons-left">
-                        {% comment %} TODO: sprawdzanie czy zalogowany juz polubil itd {% endcomment %}
                         {% if post in user.liked_posts %}
                         <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
                         {% else %}
@@ -41,29 +41,16 @@
                         {% endif %}
                     </div>
                 </div>
-                {% comment %} <p class="post-author">squeextv</p> {% endcomment %}
                 {% if post.tags %}
                 <div class="post-tags">
                     {% for tag in post.tags.all %}
-                        {% comment %} <p class="tag hover">#lifestyle<p> {% endcomment %}
                         <a class="tag hover" href="{% url 'instaapp:grid' %}?search={{tag.name}}">#{{tag.name}}</a>
                     {% endfor %}
                 </div>
                 {% endif %}
                 <span class="post-content">{{post.description}}</span>
-                {% comment %}
-                    <div class="comment">
-                    <p class="comm-author hover">johnny:</p>
-                    <p class="comm-text">Yeah, that would happen to you</p>
-                </div>
-                {% endcomment %}
-                {% comment %} <span class="translate">Translate</span> {% endcomment %}
-                {% comment %} <span class="see-all underline-hover">See all comments: 48</span> {% endcomment %}
-                {% comment %} <div>
-                    <span class="add-comment underline-hover">add a comment</span>
-                </div> {% endcomment %}
             </div>
-        </div>
+        </div> {% endcomment %}
         <div class="comments">
             {% for comment in comments %}
             <div class="comment">

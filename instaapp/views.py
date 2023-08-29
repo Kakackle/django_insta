@@ -4,8 +4,12 @@ from django.http import HttpResponseRedirect
 from instaapp.models import Post, Comment, Tag
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
+from django.views.generic import UpdateView
 from users.models import UserProfile, Following
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import PostForm
 
 # Create your views here.
 def home_view(request):
@@ -158,3 +162,58 @@ def post_view(request, post_slug):
                "comments": comments}
 
     return render(request, "instaapp/post.django-html", context)
+
+
+# ---------------------------------------------------------------------------- #
+#                                  form views                                  #
+# ---------------------------------------------------------------------------- #
+
+@login_required()
+def create_post(request):
+    if request.POST:
+        user = request.user
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = user
+            post.save()
+
+            # tagi
+            new_tag_1 = form.cleaned_data.get("new_tag_1")
+            new_tag_2 = form.cleaned_data.get("new_tag_2")
+            new_tag_3 = form.cleaned_data.get("new_tag_3")
+            new_tags = [new_tag_1, new_tag_2, new_tag_3]
+            
+            for tag in new_tags:
+                if tag:
+                    if not Tag.objects.filter(name=tag):
+                        new_tag_obj = Tag.objects.create(name=tag)
+                        print('new tag: ', new_tag_obj)
+                        new_tag_obj.save()
+                        # FIXME: ten add nie dziala z jakiegos powodu
+                        post.tags.add(new_tag_obj)
+                        post.save()
+                        form.save_m2m()
+
+            form.save_m2m()
+            # TODO: + dodanie do ilosci postow uzytkownika
+            return redirect('users:user_view', user_slug=user.username)
+    else:
+        form = PostForm()
+    return render(request, 'instaapp/post_create.django-html', {'form': form})
+
+
+@method_decorator(login_required, name='dispatch')
+class PostUpdateView(UpdateView):
+    model = Post
+    fields = ('description', 'post_image', 'tags', )
+    template_name = 'instaapp/post_update.django-html'
+    # success_url = reverse_lazy('users:post', kwargs={"post_slug": self.})
+
+    # FIXME: tragedia, z jakiegos powodu w requescie nie ma nic
+    # def get_object(self):
+    #     print('post_slug', self.request.GET.get('post_slug'))
+    #     return Post.objects.get(slug=self.request.GET.get('post_slug'))
+    
+    def get_success_url(self, **kwargs):
+        return reverse_lazy('instaapp:post', kwargs = {'post_slug': self.request.GET.get('slug')})

@@ -11,4 +11,5 @@ urlpatterns = [
     # path('edit', views.UserUpdateView.as_view(), name="account_edit")
     path("edit", views.edit_view, name="account_edit"),
     path("delete", views.delete_view, name="delete"),
+    path("password", views.change_password, name="password")
 ]

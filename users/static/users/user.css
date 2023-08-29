@@ -40,6 +40,13 @@
     gap: 5px;
 }
 
+.right-top-right{
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    min-width: 150px;
+}
+
 .author{
     font-weight: 600;
 }
@@ -72,4 +79,12 @@
     height: 400px;
     width: 300px;
     background-color: var(--gray-lighter);
+}
+
+.add-post{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-size: 20px;
+    color: var(--gray-dark);
 }

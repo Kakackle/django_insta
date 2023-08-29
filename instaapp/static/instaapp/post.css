@@ -27,6 +27,8 @@
 
 .post-top-left{
     display: flex;
+    justify-content: flex-start;
+    justify-self: flex-start;
     align-items: center;
     gap: 10px;
     font-size: 20px;
