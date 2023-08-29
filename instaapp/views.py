@@ -217,3 +217,12 @@ class PostUpdateView(UpdateView):
     
     def get_success_url(self, **kwargs):
         return reverse_lazy('instaapp:post', kwargs = {'post_slug': self.request.GET.get('slug')})
+    
+@login_required()
+def delete_post_view(request, post_slug):
+    if request.POST:
+        # print('tried to delete me, huh?')
+        Post.objects.get(slug=post_slug).delete()
+        return redirect('instaapp:home')
+    
+    return render(request, 'instaapp/delete_post_confirm.django-html')

@@ -7,7 +7,14 @@
                 {{post.author.username}}</a>
             <p class="post-time">{{post.date_posted|naturaltime}}</p>
         </div>
-        <ion-icon class="post-icon hover" name="ellipsis-horizontal"></ion-icon>
+        <div class="post-top-right">
+            {% if user == post.author %}
+            <a class="" href="{% url 'instaapp:edit_post' slug=post.slug %}">EDIT POST</a>
+            <a class="" href="{% url 'instaapp:delete_post' post_slug=post.slug %}">DELETE POST</a>
+            {% endif %}
+            <ion-icon class="post-icon hover" name="ellipsis-horizontal"></ion-icon>
+        </div>
+        
     </div>
     <a href="{% url 'instaapp:post' post_slug=post.slug %}">
     <div class="post-img-div">
@@ -65,15 +72,15 @@
         </div>
         {% endif %}
         <span class="post-content">{{post.description}}</span>
-        {% if post.comments %}
-        {% for comment in post.comments.all|slice:"5" %}
-        <div class="comment">
-            <p class="comm-author hover">{{comment.author.username}}:</p>
-            <p class="comm-text">{{comment.message}}</p>
-        </div>
-        {% endfor %}
+        {% if post.comments.all %}
+            {% for comment in post.comments.all|slice:"5" %}
+            <div class="comment">
+                <p class="comm-author hover">{{comment.author.username}}:</p>
+                <p class="comm-text">{{comment.message}}</p>
+            </div>
+            {% endfor %}
         {% else %}
-            <p>No comments yet</p>
+            <p class="see-all">No comments yet</p>
         {% endif %}
         
         <span class="see-all underline-hover">See all comments: {{post.comment_count}}</span>

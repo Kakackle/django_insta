@@ -1,16 +1,17 @@
 {% extends 'base.django-html' %}
 {% load static %}
-{% block title %} Delete account {% endblock title %}
+{% block title %} Delete post {% endblock title %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+<link rel="stylesheet" href="{% static 'instaapp/home.css' %}">
 <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
 {% endblock styles %}
 
 {% comment %} {% load crispy_forms_tags %} {% endcomment %}
 
 {% block content %}
-    <main class="main">
-        <h1> Are you sure you want to delete your account? </h1>
+    <main class="main-home">
+        <h1> Are you sure you want to delete the post? </h1>
+        {% comment %} FIXME: tutaj moze mozna by wrzucic podglad usuwanego postu {% endcomment %}
         <form method="post" novalidate>
             {% csrf_token %}
             {% comment %} {{form|crispy}} {% endcomment %}
