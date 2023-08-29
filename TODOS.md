@@ -1,10 +1,10 @@
-TODO: views zwiazane z logowaniem i rejestracja
-
 TODO: przejscia miedzy profilem a edycja profilu a edycja konta (rozne rzeczy - dodac linki w profile view itd)
 
-TODO:: dodac obsluge przyjmowania obrazow w trakcie registration form
+TODO:: dodac obsluge przyjmowania obrazow w trakcie registration form?
 
 TODO: form views
+
+TODO: restriced names for users etc (zeby slug nie konflikowal z funkcjonalnosciami)
 
 TODO: przerzuc posty na komponent includes, bo poki co w dwoch miejscach zmiany ale moze zrobic sie wiecej
 

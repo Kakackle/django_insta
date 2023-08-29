@@ -16,7 +16,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 related_name='profile')
     profile_img = models.ImageField(null=True, blank=True,
-                                     upload_to=upload_to_profile)
+                                     upload_to=upload_to_profile,
+                                     default="../static/img/placeholder_avatar.png")
     bio = models.CharField(null=True, blank=True, max_length=500)
     date_created = models.DateField(auto_now_add=True)
     slug = models.SlugField(unique=True, default='temp')

@@ -3,13 +3,15 @@
 {% block title %} Signup {% endblock title %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
 {% endblock styles %}
 
-{% block body %}
-    {% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
+
+{% block content %}
     <main class="main">
         <h1> Sign up </h1>
-        <form method="post" novalidate>
+        <form enctype="multipart/form-data" method="post" novalidate>
             {% csrf_token %}
             {{form|crispy}}
             <button type="submit" class="btn btn-primary hover">CREATE ACCOUNT</button>
@@ -19,4 +21,8 @@
           </div>
   
     </main>
-{% endblock body %}
+{% endblock content %}
+
+{% block scripts %}
+<script href="{% static 'bootstrap/bootsrtap.min.js' %}"></script>
+{% endblock scripts%}

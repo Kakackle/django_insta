@@ -3,9 +3,11 @@
 {% block title %} Signup {% endblock title %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+<link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+<link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
 {% endblock styles %}
 
-{% block body %}
+{% block content %}
     {% load crispy_forms_tags %}
     <main class="main">
         <h1> Log in </h1>
@@ -23,4 +25,8 @@
             <a href="#" class="text-muted">Forgot your password?</a>
         </small>
     </main>
-{% endblock body %}
+{% endblock content %}
+
+{% block scripts %}
+<script href="{% static 'bootstrap/bootsrtap.min.js' %}"></script>
+{% endblock scripts %}

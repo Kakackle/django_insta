@@ -17,7 +17,6 @@ def home_view(request):
         followed_users = User.objects.filter(pk__in=followed_users_pks)
 
         liked_posts = request.user.liked_posts.all()
-        print('liked_posts ',liked_posts)
 
     else:
         followed_users = []

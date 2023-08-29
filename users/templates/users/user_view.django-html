@@ -16,7 +16,12 @@
                         <p class="author">{{user.first_name}} {{user.last_name}}</p>
                         <p class="user-info">@{{user.username}}</p>
                     </div>
-                    <p class="user-info">since {{user.profile.date_created}}</p>
+                    <div class="right-top-right">
+                        <p class="user-info">since {{user.profile.date_created}}</p>
+                        {% if request.user == user%}
+                            <a class="user-controls" href="{% url 'accounts:account_edit' %}">Edit profile</a>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="right-bottom">
                     <p class="user-info">{{user.profile.bio}}</p>
