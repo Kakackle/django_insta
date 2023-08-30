@@ -105,10 +105,10 @@ def post_view(request, post_slug):
     else:
         followed_users = []
 
-    comments = post.comments.all()
+    comments = post.comments.all().order_by("-date_posted")
 
     page = request.GET.get('comment_page', 1)
-    paginator = Paginator(comments, 4)
+    paginator = Paginator(comments, 15)
 
     try:
         comments = paginator.page(page)
@@ -278,3 +278,95 @@ def delete_post_view(request, post_slug):
         "post": post
     }
     return render(request, 'instaapp/delete_post_confirm.django-html', context)
+
+# ---------------------------------------------------------------------------- #
+#                                   comments                                   #
+# ---------------------------------------------------------------------------- #
+
+@login_required()
+def add_comment_view(request, post_slug):
+    try:
+        post = get_object_or_404(Post, slug=post_slug)
+    except Http404:
+        return redirect('instaapp:home')
+    if request.POST:
+        comment = Comment.objects.create(author=request.user,
+                                         message=request.POST.get('comment-input'),
+                                         post=post)
+        ctype = request.POST.get("comment-type")
+    
+    #aktualizacja
+    post = get_object_or_404(Post, slug=post_slug)
+    
+    comments = post.comments.all().order_by("date_posted")
+
+    page = request.GET.get('comment_page', 1)
+    paginator = Paginator(comments, 15)
+
+    try:
+        comments = paginator.page(page)
+    except PageNotAnInteger:
+        comments = paginator.page(1)
+    except EmptyPage:
+        comments = paginator.page(paginator.num_pages)
+
+    context = {"post": post,
+               "comments": comments
+               }
+    # poniewaz chcemy miec jeden view do tworzenia komentarzy
+    # ale chcemy zwrac w postaci dwoch wygladow w zaleznosci czy jest on dodawany
+    # z poziomu home view czy post view, wartosc poziomu przekazywana jako ukryta
+    if ctype == "home":
+        return render(request, "instaapp/add_comment_home.django-html", context)
+    else:
+        return render(request, "instaapp/add_comment_post.django-html", context)
+
+@login_required()
+def like_comm_view(request, comment_slug):
+    try:
+        comment = get_object_or_404(Comment, slug=comment_slug)
+    except Http404:
+        return redirect('instaapp:home')
+    
+    if request.POST:
+        if request.user not in comment.liked_by.all():
+            comment.liked_by.add(request.user)
+            comment.like_count += 1
+            comment.save()
+            request.user.liked_comments.add(comment)
+            request.user.save()
+    # aktualizacja
+    context = {
+        "comment": comment
+    }
+    if request.user not in comment.liked_by.all():
+        return render(request, "instaapp/like_comm.django-html", context)
+    else:
+        return render(request, "instaapp/unlike_comm.django-html", context)
+
+@login_required()
+def unlike_comm_view(request, comment_slug):
+    try:
+        comment = get_object_or_404(Comment, slug=comment_slug)
+    except Http404:
+        return redirect('instaapp:home')
+    
+    if request.POST:
+        if request.user in comment.liked_by.all():
+            comment.liked_by.remove(request.user)
+            comment.like_count -= 1
+            comment.save()
+            request.user.liked_comments.remove(comment)
+            request.user.save()
+    # aktualizacja
+    context = {
+        "comment": comment
+    }
+    if request.user not in comment.liked_by.all():
+        return render(request, "instaapp/like_comm.django-html", context)
+    else:
+        return render(request, "instaapp/unlike_comm.django-html", context)
+    
+    
+
+

@@ -1,0 +1,27 @@
+<div class="home-comments-div">
+    {% if post.comments.all %}
+        {% for comment in post.comments.all|slice:"5" %}
+        <div class="comment">
+            <p class="comm-author hover">{{comment.author.username}}:</p>
+            <p class="comm-text">{{comment.message}}</p>
+        </div>
+        {% endfor %}
+        <a class="see-all underline-hover" href="{% url 'instaapp:post' post_slug=post.slug %}"
+        >See all comments: {{post.comment_count}}</a>
+    {% else %}
+        <p class="no-comms">No comments yet</p>
+    {% endif %}
+    <div class="add-comment-div">
+        <form id="add-comment"
+            hx-post="{% url 'instaapp:add_comment' post_slug=post.slug %}"
+            hx-swap="outerHTML"
+            hx-target=".home-comments-div">
+            {% csrf_token %}
+            <input type="hidden" name="comment-type" value="home">
+            <input type="text" class="comment-input" name="comment-input">
+            <button type="submit" class="add-comment underline-hover"
+                >add a comment
+            </button>
+        </form>
+    </div>
+</div>

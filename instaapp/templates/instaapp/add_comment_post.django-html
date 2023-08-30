@@ -1,0 +1,32 @@
+<div class="comments">
+    <div class="add-comment-div">
+        <form id="add-comment"
+            hx-post="{% url 'instaapp:add_comment' post_slug=post.slug %}"
+            hx-swap="outerHTML"
+            hx-target=".comments">
+            {% csrf_token %}
+            <input type="hidden" name="comment-type" value="post">
+            <input type="text" class="comment-input" name="comment-input">
+            <button type="submit" class="add-comment underline-hover"
+                >add a comment
+            </button>
+        </form>
+    </div>
+    {% if comments %}
+        {% for comment in comments %}
+        <div class="comment">
+            <a class="comm-author hover" href="{% url 'users:user_view' user_slug=comment.author.username %}">
+                {{comment.author.username}}:</a>
+            <p class="comm-text">{{comment.message}}</p>
+            {% if comment in user.liked_comments %}
+            <ion-icon class="comm-icon liked hover" name="heart"></ion-icon>
+            {% else %}
+            <ion-icon class="comm-icon unliked hover" name="heart-outline"></ion-icon>
+            {% endif %}
+            <span class="comm-likes">{{comment.like_count}}</span>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-comms">No comments yet</p>
+    {% endif %}
+</div>

@@ -1,0 +1,12 @@
+<div class="icons-left-comm">
+    <form id="like-comm"
+        hx-post="{% url 'instaapp:like_comm' comment_slug=comment.slug %}"
+        hx-swap="outerHTML"
+        hx-target=".icons-left-comm">
+        {% csrf_token %}
+        <button class="like-button" type="submit">
+            <ion-icon class="comm-icon unliked hover" name="heart-outline"></ion-icon>
+        </button>
+    </form>
+    <span class="comm-likes">{{comment.like_count}}</span>
+</div>
