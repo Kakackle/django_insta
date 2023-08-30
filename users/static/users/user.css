@@ -88,3 +88,8 @@
     font-size: 20px;
     color: var(--gray-dark);
 }
+
+.follow{
+    color: var(--blue-dark);
+    font-size: 12px;
+}

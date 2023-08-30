@@ -34,6 +34,12 @@
     font-size: 20px;
 }
 
+.post-top-right{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
 .post-av{
     height: 30px;
     width: 30px;
@@ -91,6 +97,7 @@
 .icons-left{
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .post-tags{
@@ -103,8 +110,13 @@
     font-size: 12px;
 }
 
-.likes, .post-content, .translate, .see-all, .add-comment{
+.likes, .post-content, .translate, .see-all, .add-comment, .no-comms{
     font-size: 15px;
+}
+
+.post-content{
+    /* border-bottom: 1px solid var(--gray-light); */
+    font-weight: 300;
 }
 
 .translate{
@@ -119,9 +131,19 @@
     font-weight: 300;
 }
 
+.no-comms{
+    color: var(--gray-mid);
+    /* font-weight: 500; */
+}
+
 .add-comment{
     margin-top: 5px;
     font-weight: 500;
+}
+
+.like-button{
+    background-color: var(--white);
+    border: none;
 }
 
 .unliked{

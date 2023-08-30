@@ -80,12 +80,13 @@
             </div>
             {% endfor %}
         {% else %}
-            <p class="see-all">No comments yet</p>
+            <p class="no-comms">No comments yet</p>
         {% endif %}
-        
+        {% if is_home_view %}
         <span class="see-all underline-hover">See all comments: {{post.comment_count}}</span>
         <div>
             <span class="add-comment underline-hover">add a comment</span>
         </div>
+        {% endif %}
     </div>
 </div>

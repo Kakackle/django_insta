@@ -15,6 +15,13 @@
                     <div class="right-top-left">
                         <p class="author">{{user.first_name}} {{user.last_name}}</p>
                         <p class="user-info">@{{user.username}}</p>
+                        {% if followed_users %}
+                            {% if user in followed_users %}
+                            <p id="follow-user" class="follow underline-hover">FOLLOW USER</p>
+                            {% else %}
+                            <p id="unfollow-user" class="follow underline-hover">UNFOLLOW USER</p>
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="right-bottom">
@@ -57,3 +64,42 @@
         {% endif %}
     </main>
 {% endblock content %}
+
+{% comment %} {% block scripts %}
+<script>
+    follow_button = document.getElementById('follow-user');
+    unfollow_button = document.getElementById('unfollow-user');
+    let newHTML = "";
+    const follow_user = function(e){
+        e.preventDefault();
+        fetch("{% url 'users:follow user_slug=user.username' %}")
+        .then((res)=>{
+            console.log(res);
+            newHtml = res;
+            follow_button.innerHTML = newHTML;
+
+            follow_button = document.getElementById('follow-user');
+            unfollow_button = document.getElementById('unfollow-user');
+            follow_button.addEventListener("click", (e)=>{follow_user(e)})
+            unfollow_button.addEventListener("click", (e)=>{follow_user(e)})
+        })
+    }
+    const unfollow_user = function(e){
+        e.preventDefault();
+        fetch("{% url 'users:follow user_slug=user.username' %}")
+        .then((res)=>{
+            console.log(res);
+            newHTML = res;
+            follow_button.innerHTML = newHTML;
+
+            unfollow_button = document.getElementById('follow-user');
+            unfollow_button = document.getElementById('unfollow-user');
+            follow_button.addEventListener("click", (e)=>{follow_user(e)})
+            unfollow_button.addEventListener("click", (e)=>{follow_user(e)})
+        })
+    }
+    follow_button.addEventListener("click", (e)=>{follow_user(e)})
+    unfollow_button.addEventListener("click", (e)=>{follow_user(e)})
+</script>
+
+{% endblock scripts %} {% endcomment %}

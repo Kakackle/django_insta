@@ -220,9 +220,12 @@ class PostUpdateView(UpdateView):
     
 @login_required()
 def delete_post_view(request, post_slug):
+    post = Post.objects.get(slug=post_slug)
     if request.POST:
-        # print('tried to delete me, huh?')
-        Post.objects.get(slug=post_slug).delete()
-        return redirect('instaapp:home')
-    
-    return render(request, 'instaapp/delete_post_confirm.django-html')
+        # Post.objects.get(slug=post_slug).delete()
+        post.delete()
+        return redirect('users:user_view', user_slug=post.author.username)
+    context = {
+        "post": post
+    }
+    return render(request, 'instaapp/delete_post_confirm.django-html', context)

@@ -2,27 +2,25 @@
 {% load static %}
 {% block title %} Delete post {% endblock title %}
 {% block styles %}
-<link rel="stylesheet" href="{% static 'instaapp/home.css' %}">
+<link rel="stylesheet" href="{% static 'instaapp/post.css' %}">
 <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
 {% endblock styles %}
 
 {% comment %} {% load crispy_forms_tags %} {% endcomment %}
 
 {% block content %}
-    <main class="main-home">
+    <main class="main-post">
         <h1> Are you sure you want to delete the post? </h1>
-        {% comment %} FIXME: tutaj moze mozna by wrzucic podglad usuwanego postu {% endcomment %}
+        <container class="post-preview">
+            <img class="post-img" src="{{post.post_image.url}}">
+            <p class="post-content">{{post.description}}</p>
+        </container>
         <form method="post" novalidate>
             {% csrf_token %}
             {% comment %} {{form|crispy}} {% endcomment %}
             <button type="submit" class="btn btn-outline-primary hover">Confirm</button>
-            <a class="btn btn-primary hover" href="{% url 'instaapp:home' %}">Cancel</a>
+            <a class="btn btn-primary hover" href="{% url 'users:user_view' user_slug=post.author.username %}">Cancel</a>
         </form>
-        {% comment %} <div class="card-footer text-muted text-center">
-            Already have an account? <a href="{% url 'accounts:login' %}">Log in</a>
-        </div> {% endcomment %}
-        {% comment %} <a class="btn btn-outline-primary" href="{% url 'instaapp:home' %}">Confirm</a> {% endcomment %}
-        {% comment %} <a class="btn btn-primary" href="{% url 'accounts:delete' %}">Cancel</a> {% endcomment %}
     </main>
 {% endblock content %}
 
