@@ -46,6 +46,11 @@ def follow_view(request, user_slug):
             Following.objects.create(followed_user=user,
                                      following_user=request.user,
                                      date_followed=timezone.now())
+            user.profile.followed_by_count += 1
+            user.profile.save()
+            request.user.profile.followed_count += 1
+            request.user.profile.save()
+
     #aktualizacja
     followed_users_pks = list(request.user.followed.all()\
                               .values_list('followed_user', flat=True))
@@ -74,6 +79,10 @@ def unfollow_view(request, user_slug):
         if user in followed_users:
             following = Following.objects.get(followed_user=user.pk)
             following.delete()
+            user.profile.followed_by_count -= 1
+            user.profile.save()
+            request.user.profile.followed_count -= 1
+            request.user.profile.save()
 
     followed_users_pks = list(request.user.followed.all()\
                               .values_list('followed_user', flat=True))

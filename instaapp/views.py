@@ -183,6 +183,8 @@ def like_view(request, post_slug):
             post.save()
             request.user.liked_posts.add(post)
             request.user.save()
+            post.author.profile.like_count+=1
+            post.author.profile.save()
     # aktualizacja
     context = {
         "post": post
@@ -204,6 +206,8 @@ def unlike_view(request, post_slug):
             post.save()
             request.user.liked_posts.remove(post)
             request.user.save()
+            post.author.profile.like_count-=1
+            post.author.profile.save()
     # aktualizacja
     context = {
         "post": post
@@ -226,8 +230,15 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = user
             post.save()
+            user.profile.post_count+=1
+            user.profile.save()
+            form.save_m2m()
+            # zliczanie dla tagow
+            for tag in post.tags.all():
+                tag.post_count += 1
+                tag.save()
 
-            # tagi
+            # nowe tagi
             new_tag_1 = form.cleaned_data.get("new_tag_1")
             new_tag_2 = form.cleaned_data.get("new_tag_2")
             new_tag_3 = form.cleaned_data.get("new_tag_3")
@@ -244,7 +255,7 @@ def create_post(request):
                         post.save()
                         form.save_m2m()
 
-            form.save_m2m()
+            
             # TODO: + dodanie do ilosci postow uzytkownika
             return redirect('users:user_view', user_slug=user.username)
     else:
@@ -272,6 +283,11 @@ def delete_post_view(request, post_slug):
     post = Post.objects.get(slug=post_slug)
     if request.POST:
         # Post.objects.get(slug=post_slug).delete()
+        post.author.profile.post_count -= 1
+        for tag in post.tags.all():
+                tag.post_count -= 1
+                tag.save()
+
         post.delete()
         return redirect('users:user_view', user_slug=post.author.username)
     context = {
@@ -293,6 +309,12 @@ def add_comment_view(request, post_slug):
         comment = Comment.objects.create(author=request.user,
                                          message=request.POST.get('comment-input'),
                                          post=post)
+        post.comment_count += 1
+        post.save()
+        #FIXME: z jakiegos powodu to ejdno zliczanie nie dziala...
+        request.user.profile.comment_count += 1
+        request.user.profile.save()
+
         ctype = request.POST.get("comment-type")
     
     #aktualizacja
