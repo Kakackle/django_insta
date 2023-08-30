@@ -1,0 +1,6 @@
+<form id="unfollow-user"
+hx-post="{% url 'users:unfollow' user_slug=user.username %}"
+hx-swap="outerHTML">
+{% csrf_token %}
+<button type="submit" class="follow underline-hover">UNFOLLOW USER</button>
+</form>

@@ -32,6 +32,8 @@ def user_list_view(request):
 
 @login_required()
 def follow_view(request, user_slug):
+    print('user_slug: ', user_slug)
+    print('request user: ', request.user.username)
     try:
         user = get_object_or_404(User, username=user_slug)
     except Http404:
@@ -44,11 +46,23 @@ def follow_view(request, user_slug):
             Following.objects.create(followed_user=user,
                                      following_user=request.user,
                                      date_followed=timezone.now())
-        
-    return redirect('users:user_view', user_slug=user.username)
+    #aktualizacja
+    followed_users_pks = list(request.user.followed.all()\
+                              .values_list('followed_user', flat=True))
+    followed_users = User.objects.filter(pk__in=followed_users_pks)
+    context = {
+        "user": user
+    }
+    if user not in followed_users:
+        return render(request, "users/follow.django-html", context)
+    else:
+        return render(request, "users/unfollow.django-html", context)
+    # return redirect('users:user_view', user_slug=user.username)
 
 @login_required()
 def unfollow_view(request, user_slug):
+    print('user_slug: ', user_slug)
+    print('request user: ', request.user.username)
     try:
         user = get_object_or_404(User, username=user_slug)
     except Http404:
@@ -58,8 +72,19 @@ def unfollow_view(request, user_slug):
     followed_users = User.objects.filter(pk__in=followed_users_pks)
     if request.POST:
         if user in followed_users:
-            following = Following.object.get(followed_user=user.pk)
+            following = Following.objects.get(followed_user=user.pk)
             following.delete()
 
-    return redirect('users:user_view', user_slug=user.username)
+    followed_users_pks = list(request.user.followed.all()\
+                              .values_list('followed_user', flat=True))
+    followed_users = User.objects.filter(pk__in=followed_users_pks)
+    
+    context = {
+        "user": user
+    }
+    if user in followed_users:
+        return render(request, "users/unfollow.django-html", context)
+    else:
+        return render(request, "users/follow.django-html", context)
+    # return redirect('users:user_view', user_slug=user.username)
             

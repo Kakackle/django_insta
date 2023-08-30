@@ -92,4 +92,6 @@
 .follow{
     color: var(--blue-dark);
     font-size: 12px;
+    background-color: var(--white);
+    border:none;
 }

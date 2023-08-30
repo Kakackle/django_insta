@@ -1,0 +1,6 @@
+<form id="follow-user"
+hx-post="{% url 'users:follow' user_slug=user.username %}"
+hx-swap="outerHTML">
+{% csrf_token %}
+<button type="submit" class="follow underline-hover">FOLLOW USER</button>
+</form>

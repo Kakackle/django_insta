@@ -17,9 +17,19 @@
                         <p class="user-info">@{{user.username}}</p>
                         {% if followed_users %}
                             {% if user in followed_users %}
-                            <p id="follow-user" class="follow underline-hover">FOLLOW USER</p>
+                                <form id="follow-user"
+                                    hx-post="{% url 'users:follow' user_slug=user.username %}"
+                                    hx-swap="outerHTML">
+                                    {% csrf_token %}
+                                    <button type="submit" class="follow underline-hover">FOLLOW USER</button>
+                                </form>
                             {% else %}
-                            <p id="unfollow-user" class="follow underline-hover">UNFOLLOW USER</p>
+                                <form id="unfollow-user"
+                                    hx-post="{% url 'users:unfollow' user_slug=user.username %}"
+                                    hx-swap="outerHTML">
+                                    {% csrf_token %}
+                                    <button type="submit" class="follow underline-hover">UNFOLLOW USER</button>
+                                </form>
                             {% endif %}
                         {% endif %}
                     </div>
