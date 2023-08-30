@@ -1,0 +1,13 @@
+<div class="icons-left">
+    <form id="like-post"
+    hx-post="{% url 'instaapp:like_post' post_slug=post.slug %}"
+    hx-swap="outerHTML"
+    hx-target=".icons-left">
+        {% csrf_token %}
+        {% comment %} <input type="hidden" name="page" value="{{page}}"> {% endcomment %}
+        <button class="like-button" type="submit">
+            <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
+        </button>
+    </form>
+    <span class="likes">{{post.like_count}}</span>
+</div>

@@ -22,38 +22,23 @@
     </div>
     <div class="post-bottom">
         <div class="post-bottom-icons">
-            <div class="icons-left">
-                {% if user.is_authenticated %}
-                    {% if post in user.liked_posts.all %}
-                    <form action="{% url 'instaapp:unlike_post' post_slug=post.slug %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="page" value="{{page}}">
-                        <button class="like-button" type="submit">
-                            <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
-                        </button>
-                    </form>
-                    {% else %}
-                    <form action="{% url 'instaapp:like_post' post_slug=post.slug %}" method="post">
-                        {% csrf_token %}
-                        <input type="hidden" name="page" value="{{page}}">
-                        <button class="like-button" type="submit">
-                            <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
-                        </button>
-                    </form>
-                    {% endif %}
-                    <span class="likes">{{post.like_count}}</span>
-                {% else %}
-                <form action="{% url 'instaapp:like_post' post_slug=post.slug %}" method="post">
+            {% if user.is_authenticated %}
+                {% if post in user.liked_posts.all %}
+                {% comment %} <form action="{% url 'instaapp:unlike_post' post_slug=post.slug %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="page" value="{{page}}">
                     <button class="like-button" type="submit">
-                        <ion-icon class="post-icon unliked hover" name="heart-outline"></ion-icon>
+                        <ion-icon class="post-icon liked hover" name="heart"></ion-icon>
                     </button>
-                </form>
-                <span class="likes">{{post.like_count}}</span>
+                </form> {% endcomment %}
+                    {% include 'instaapp/unlike_post.django-html' with post=post%}
+                {% else %}
+                    {% include 'instaapp/like_post.django-html' with post=post%}
                 {% endif %}
-                
-            </div>
+            {% else %}
+                {% include 'instaapp/unlike_post.django-html' with post=post%}
+            {% endif %}
+            
             <div>
                 {% if user in followed_users %}
                 <ion-icon class="post-icon followed hover" name="bookmark"></ion-icon>
@@ -62,7 +47,6 @@
                 {% endif %}
             </div>
         </div>
-        
         {% if post.tags %}
         <div class="post-tags">
             {% for tag in post.tags.all %}

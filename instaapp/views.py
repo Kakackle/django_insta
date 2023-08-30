@@ -92,45 +92,6 @@ def grid_view(request):
                "liked": liked}
     return render(request, "instaapp/grid.django-html", context)
 
-@login_required()
-def like_view(request, post_slug):
-    try:
-        post = get_object_or_404(Post, slug=post_slug)
-    except Http404:
-        return redirect('instaapp:home')
-    page = 1
-    if request.POST:
-        if request.user not in post.liked_by.all():
-            post.liked_by.add(request.user)
-            post.like_count += 1
-            post.save()
-            request.user.liked_posts.add(post)
-            request.user.save()
-        
-    page = request.POST.get("page", 1)
-
-    return HttpResponseRedirect('/?page={}'.format(page))
-    # return redirect(request.META.get('HTTP_REFERER', 'instaapp:grid'))
-
-def unlike_view(request, post_slug):
-    try:
-        post = get_object_or_404(Post, slug=post_slug)
-    except Http404:
-        return redirect('instaapp:home')
-    page = 1
-    if request.POST:
-            if request.user in post.liked_by.all():
-                post.liked_by.remove(request.user)
-                post.like_count -= 1
-                post.save()
-                request.user.liked_posts.remove(post)
-                request.user.save()
-    page = request.POST.get("page", 1)
-
-    return HttpResponseRedirect('/?page={}'.format(page))
-
-    # return redirect(request.META.get('HTTP_REFERER', 'instaapp:home'))
-
 def post_view(request, post_slug):
     try:
         post = get_object_or_404(Post, slug=post_slug)
@@ -163,6 +124,94 @@ def post_view(request, post_slug):
 
     return render(request, "instaapp/post.django-html", context)
 
+
+
+# ---------------------------------------------------------------------------- #
+#                                    liking                                    #
+# ---------------------------------------------------------------------------- #
+
+# ============== manual, with refreshing ==============
+
+# @login_required()
+# def like_view(request, post_slug):
+#     try:
+#         post = get_object_or_404(Post, slug=post_slug)
+#     except Http404:
+#         return redirect('instaapp:home')
+#     page = 1
+#     if request.POST:
+#         if request.user not in post.liked_by.all():
+#             post.liked_by.add(request.user)
+#             post.like_count += 1
+#             post.save()
+#             request.user.liked_posts.add(post)
+#             request.user.save()
+        
+#     page = request.POST.get("page", 1)
+
+#     return HttpResponseRedirect('/?page={}'.format(page))
+
+# def unlike_view(request, post_slug):
+#     try:
+#         post = get_object_or_404(Post, slug=post_slug)
+#     except Http404:
+#         return redirect('instaapp:home')
+#     page = 1
+#     if request.POST:
+#             if request.user in post.liked_by.all():
+#                 post.liked_by.remove(request.user)
+#                 post.like_count -= 1
+#                 post.save()
+#                 request.user.liked_posts.remove(post)
+#                 request.user.save()
+#     page = request.POST.get("page", 1)
+
+#     return HttpResponseRedirect('/?page={}'.format(page))
+
+# ============== with htmx ==============
+
+@login_required()
+def like_view(request, post_slug):
+    try:
+        post = get_object_or_404(Post, slug=post_slug)
+    except Http404:
+        return redirect('instaapp:home')
+    if request.POST:
+        if request.user not in post.liked_by.all():
+            post.liked_by.add(request.user)
+            post.like_count += 1
+            post.save()
+            request.user.liked_posts.add(post)
+            request.user.save()
+    # aktualizacja
+    context = {
+        "post": post
+    }
+    if request.user not in post.liked_by.all():
+        return render(request, "instaapp/like_post.django-html", context)
+    else:
+        return render(request, "instaapp/unlike_post.django-html", context)
+    
+def unlike_view(request, post_slug):
+    try:
+        post = get_object_or_404(Post, slug=post_slug)
+    except Http404:
+        return redirect('instaapp:home')
+    if request.POST:
+        if request.user in post.liked_by.all():
+            post.liked_by.remove(request.user)
+            post.like_count -= 1
+            post.save()
+            request.user.liked_posts.remove(post)
+            request.user.save()
+    # aktualizacja
+    context = {
+        "post": post
+    }
+    if request.user in post.liked_by.all():
+        return render(request, "instaapp/unlike_post.django-html", context)
+    else:
+        return render(request, "instaapp/like_post.django-html", context)
 
 # ---------------------------------------------------------------------------- #
 #                                  form views                                  #
