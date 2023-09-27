@@ -18,8 +18,8 @@
         <div class="controls">
             <form class="search-div" action="{% url 'instaapp:grid' %}" method="get">
                 <input type="search" class="search" name="search" placeholder="lifestyle">
-                <input type="submit"><ion-icon class="search-icon hover"
-                 name="search-outline"></ion-icon></input>
+                <ion-icon class="search-icon hover"
+                 name="search-outline"></ion-icon>
             </form>
         </div>
         {% if posts %}

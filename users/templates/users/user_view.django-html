@@ -51,10 +51,12 @@
                 {% endif %}
             </div>
         </div>
+        {% if request.user == user %}
         <div class="add-post">
             <ion-icon name="add-circle-outline" class="add-icon"></ion-icon>
             <a class="add-icon hover" href="{% url 'instaapp:create' %}">ADD A NEW POST </a>
         </div>
+        {% endif %}
         {% if user.posts %}
         <container class="grid">
             {% for post in user.posts.all|dictsortreversed:"date_posted" %}

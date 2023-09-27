@@ -15,7 +15,7 @@
             <div class="right-top">
                 <div class="right-top-left">
                     <p class="author">{{user.first_name}} {{user.last_name}}</p>
-                    <a class="user-info" href="{% url 'users:user_view' user_slug=user.username %}">@{{user.username}}</a>
+                    <a class="user-info hover" href="{% url 'users:user_view' user_slug=user.username %}">@{{user.username}}</a>
                 </div>
                 <p class="user-info">since {{user.profile.date_created}}</p>
             </div>

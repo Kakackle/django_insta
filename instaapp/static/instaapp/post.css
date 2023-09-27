@@ -20,6 +20,7 @@
 }
 
 .post-top{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -115,7 +116,6 @@
 }
 
 .post-content{
-    /* border-bottom: 1px solid var(--gray-light); */
     font-weight: 300;
 }
 
@@ -139,6 +139,9 @@
 .add-comment{
     margin-top: 5px;
     font-weight: 500;
+    background-color: var(--white);
+    color: var(--almost-black);
+    border: none;
 }
 
 .like-button{
@@ -162,7 +165,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .comment{
@@ -179,4 +184,12 @@
 
 .comm-likes{
     font-size: 15px;
+}
+
+.home-comments-div{
+    margin-top: 10px;
+}
+
+.add-comment-div{
+    /* width: 100%; */
 }

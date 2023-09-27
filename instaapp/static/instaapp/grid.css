@@ -56,6 +56,12 @@
     color: var(--gray-mid);
 }
 
+.search-submit{
+    background-color: var(--white);
+    border: none;
+    color: var(--almost-black);
+}
+
 .grid{
     /* with flexbox */
     /* display: flex;

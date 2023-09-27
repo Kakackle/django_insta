@@ -5,8 +5,6 @@ from users.models import UserProfile, Following
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
-# Create your views here.
-
 def user_view(request, user_slug):
     user = User.objects.get(username=user_slug)
 
