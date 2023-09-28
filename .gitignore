@@ -86,3 +86,9 @@ __pycache__/
 local_settings.py
 
 .env
+
+
+# custom venvs
+insta_venv/
+laptop_venv/
+env/
