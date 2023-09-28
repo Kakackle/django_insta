@@ -26,10 +26,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+# DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-
-
+# ALLOWED_HOSTS=['django-insta.onrender.com', '127.0.0.1']
 
 # Application definition
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'users',
     'drf_spectacular',
     'drf_spectacular_sidecar',  # required for Django collectstatic discovery
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -98,9 +99,6 @@ DATABASES = {
 
 database_url = os.environ.get("DATABASE_URL")
 DATABASES['default'] = dj_database_url.parse(database_url)
-
-# postgres://django_insta_render_user:CXH5FqvlOsfDRVEnQhC2iMdQgLPHoviJ@dpg-ckakc5kg66mc73fpgmd0-a.frankfurt-postgres.render.com/django_insta_render
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -158,6 +156,28 @@ if not DEBUG:
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# S3
+
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3.S3Storage",
+#         "OPTIONS": {
+#         },
+#     },
+#     'staticfiles': {
+#         "BACKEND": "storages.backends.s3.S3Storage",
+#     },
+# }
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3.S3Storage"
+
+AWS_S3_ACCESS_KEY_ID = os.environ.get("AWS_S3_ACCESS_KEY_ID")
+AWS_S3_SECRET_ACCESS_KEY = os.environ.get("AWS_S3_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME='eu-north-1'
+AWS_QUERYSTRING_AUTH = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
